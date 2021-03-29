@@ -76,6 +76,12 @@
                 <li><a href="https://github.com/TarikSogukpinar/CarRentalDemo/tree/master/WebAPI/Properties">Properties</a></li>
             </ul>
         </li>
+        <li>
+            <a href="#about-the-project">SQL Script</a>
+            <ul>
+                <li><a href="https://github.com/TarikSogukpinar/CarRentalDemo/blob/master/CarRental.sql">Schema</a></li>
+            </ul>
+        </li>
     </ol>
 </details>
 
