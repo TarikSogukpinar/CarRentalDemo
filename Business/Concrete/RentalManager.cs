@@ -57,5 +57,11 @@ namespace Business.Concrete
             _rentalDal.Delete(rental);
             return new SuccessResult();
         }
+
+        public IDataResult<List<Rental>> GetRentalByCarId(int carId)
+        {
+            var getRentalByCarId = _rentalDal.GetAll(rental => rental.CarId == carId);
+            return new SuccessDataResult<List<Rental>>(getRentalByCarId);
+        }
     }
 }

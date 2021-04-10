@@ -10,6 +10,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -56,6 +57,27 @@ namespace Business.Concrete
         {
             _customerDal.Update(customer);
             return new SuccessResult();
+        }
+
+        public IDataResult<List<CustomerDetailsDto>> GetCustomerDetails()
+        {
+            return new SuccessDataResult<List<CustomerDetailsDto>>(_customerDal.GetCustomerDetails());
+        }
+
+        public IDataResult<CustomerDetailsDto> GetCustomerDetailById(int customerId)
+        {
+            return new SuccessDataResult<CustomerDetailsDto>(
+                _customerDal.GetCustomerDetailById(c => c.CustomerId == customerId));
+        }
+
+        public IDataResult<CustomerDetailsDto> GetCustomerByEmail(string email)
+        {
+            return new SuccessDataResult<CustomerDetailsDto>(_customerDal.GetCustomerByEmail(c => c.Email == email));
+        }
+
+        public IDataResult<CustomerDetailsDto> GetCustomerByCompanyName(string companyName)
+        {
+            return new SuccessDataResult<CustomerDetailsDto>(_customerDal.GetCustomerByCompany(c => c.CompanyName == companyName));
         }
     }
 }

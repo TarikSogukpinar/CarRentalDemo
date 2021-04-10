@@ -37,8 +37,13 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
         }
+        
+        public IDataResult<List<Car>> GetAllByCategoryId(int categoryId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.CarId == categoryId));
+        }
 
-        [SecuredOperation("product.add,admin,moderator")]
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         [TransactionScopeAspect]
         [CacheAspect]
@@ -50,8 +55,7 @@ namespace Business.Concrete
                 CheckCarNameIfExists(car.CarName));
 
             if (result != null) return result;
-
-
+            
             _carDal.Add(car);
             return new SuccessResult(Messages.ProductSuccessfullyAdded);
         }
@@ -77,6 +81,8 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.ProductSuccessfullyDeleted);
         }
+
+   
 
         //Business Rules
         private IResult CheckCarNameIfExists(string carName)

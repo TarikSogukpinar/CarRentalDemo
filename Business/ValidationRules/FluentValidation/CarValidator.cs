@@ -17,6 +17,9 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(c => c.FuelType).MinimumLength(2);
 
             RuleFor(c => c.Description).MinimumLength(5);
+
+            RuleFor(c => c.DailyPrice).NotNull();
+            RuleFor(c => c.DailyPrice).GreaterThan(10);
         }
     }
 }

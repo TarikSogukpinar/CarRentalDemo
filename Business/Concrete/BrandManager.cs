@@ -78,7 +78,7 @@ namespace Business.Concrete
         private IResult CheckBrandNameIfExists(string brandName)
         {
             var result = _brandDal.GetAll(c => c.BrandName == brandName).Any();
-            if (result) return new SuccessResult();
+            if (!result) return new SuccessResult();
 
             return new ErrorResult(Messages.BrandNameExists);
         }

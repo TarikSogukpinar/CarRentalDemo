@@ -26,7 +26,10 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
+            
 
+            //Cors İnjection
             services.AddCors();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
@@ -55,9 +58,12 @@ namespace WebAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage(); 
+            
+            app.ConfigureCustomExceptionMiddleware();
+            //Cors
             app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
+            
 
             app.UseHttpsRedirection();
 

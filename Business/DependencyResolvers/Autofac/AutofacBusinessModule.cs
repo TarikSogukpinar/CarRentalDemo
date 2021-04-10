@@ -16,6 +16,12 @@ namespace Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<CarImageManager>().As<ICardService>().SingleInstance();
+            builder.RegisterType<CarImageManager>().As<ICarImageDal>().SingleInstance();
+            
+            builder.RegisterType<CardManager>().As<ICardService>().SingleInstance();
+            builder.RegisterType<EfCarDal>().As<ICardDal>().SingleInstance();
+            
             builder.RegisterType<CustomerManager>().As<ICustomerService>().SingleInstance();
             builder.RegisterType<EfCustomerDal>().As<ICustomerDal>().SingleInstance();
 

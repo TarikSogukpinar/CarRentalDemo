@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using System.Threading;
+using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,12 +15,24 @@ namespace WebAPI.Controllers
         {
             _colorService = colorService;
         }
+        
+        [HttpGet("getbycolorid")]
+        public IActionResult GetById(int colorId)
+        {
+            var result = _colorService.GetById(colorId);
+            if (result.Success) return Ok(result);
+
+            return BadRequest(result);
+        }
 
         [HttpGet("getallcolors")]
         public IActionResult GetAll()
         {
+            const int sleepTime = 5000;
+            Thread.Sleep(sleepTime);
+            
             var result = _colorService.GetAll();
-            if (result.Success) return Ok(result.Data);
+            if (result.Success) return Ok(result);
 
             return BadRequest(result);
         }

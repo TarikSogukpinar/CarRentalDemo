@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getallrentals")]
+        [HttpGet("getrentbyId")]
         public IActionResult GetByRentId(int id)
         {
             var result = _rentalService.GetByRentId(id);
@@ -32,6 +32,16 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpGet("getrentalbycarid")]
+        public IActionResult GetRentalsByCarId(int id)
+        {
+            var result = _rentalService.GetRentalByCarId(id);
+            if (result.Success) return Ok(result.Data);
+
+            return BadRequest(result);
+        }
+
 
         [HttpPost("addrentals")]
         public IActionResult Add(Rental rental)

@@ -9,5 +9,6 @@ namespace Entities.Concrete
         public string FuelType { get; set; }
         public int ProductionYear { get; set; }
         public string Description { get; set; }
+        public int DailyPrice { get; set; }
     }
 }

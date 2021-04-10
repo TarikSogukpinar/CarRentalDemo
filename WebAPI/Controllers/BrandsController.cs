@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using System.Threading;
+using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,10 +17,23 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getallbrands")]
-        public IActionResult GetAllCars()
+        public IActionResult GetAllBrands()
         {
+            
+            const int sleepTime = 5000;
+            Thread.Sleep(sleepTime);
+            
             var result = _brandService.GetAll();
-            if (result.Success) return Ok(result.Data);
+            if (result.Success) return Ok(result);
+
+            return BadRequest(result);
+        }
+        
+        [HttpGet("getbybrandid")]
+        public IActionResult GetById(int brandId)
+        {
+            var result = _brandService.GetById(brandId);
+            if (result.Success) return Ok(result);
 
             return BadRequest(result);
         }

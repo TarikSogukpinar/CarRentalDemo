@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using System.Threading;
+using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,8 +19,14 @@ namespace WebAPI.Controllers
         [HttpGet("getallcars")]
         public IActionResult GetAllCars()
         {
+            const int sleepTime = 5000;
+            Thread.Sleep(sleepTime);
+            
             var result = _carService.GetAll();
-            if (result.Success) return Ok(result.Data);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
 
             return BadRequest(result);
         }
@@ -28,6 +35,15 @@ namespace WebAPI.Controllers
         public IActionResult GetById(int carId)
         {
             var result = _carService.GetById(carId);
+            if (result.Success) return Ok(result);
+
+            return BadRequest(result);
+        }
+        
+        [HttpGet("getbycategory")]
+        public IActionResult GetByCategory(int categoryId)
+        {
+            var result = _carService.GetAllByCategoryId(categoryId);
             if (result.Success) return Ok(result);
 
             return BadRequest(result);
